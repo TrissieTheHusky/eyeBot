@@ -29,7 +29,6 @@ client.on('messageDelete', message => {
 	log.addField('Has attachment?', (message.attachments.size === 0) ? 'No' : 'Yes');
 	log.setColor('#EE4444');
 	logChannel.send(log).catch(console.error);
-	
 });
 
 client.on('message', message => {
@@ -47,6 +46,23 @@ client.on('message', message => {
 		log.setColor('#44EE44');
 		logChannel.send(log).catch(console.error);
 	}
+});
+
+client.on('messageUpdate', (oldMessage, newMessage) => {
+	if (oldMessage.channel.type !== 'text' || oldMessage.channel.id === logChannelId) return;
+
+	let log = new Discord.RichEmbed();
+	log.setTitle('🔧 Message edited');
+	log.addField('User', oldMessage.author.tag, true);
+	log.addField('UserID', oldMessage.author.id, true);
+	log.addField('Old Message', (oldMessage.cleanContent === '' ? '<empty message>' : oldMessage.cleanContent));
+	log.addField('New Message', (newMessage.cleanContent === '' ? '<empty message>' : newMessage.cleanContent));
+	log.addField('MessageID', oldMessage.id);
+	log.addField('Channel', oldMessage.channel.name);
+	log.addField('ChannelID', oldMessage.channel.id);
+	log.addField('Has attachment?', (oldMessage.attachments.size === 0) ? 'No' : 'Yes');
+	log.setColor('#EE4444');
+	logChannel.send(log).catch(console.error);
 });
 
 client.login(token.discord);
