@@ -24,8 +24,8 @@ client.on('messageDelete', message => {
 	log.addField('UserID', message.author.id, true);
 	log.addField('Message', (message.cleanContent === '' ? '<empty message>' : message.cleanContent));
 	log.addField('MessageID', message.id);
-	log.addField('Channel', message.channel.name);
-	log.addField('ChannelID', message.channel.id);
+	log.addField('Channel', message.channel.name, true);
+	log.addField('ChannelID', message.channel.id, true);
 	log.addField('Has attachment?', (message.attachments.size === 0) ? 'No' : 'Yes');
 	log.setColor('#EE4444');
 	logChannel.send(log).catch(console.error);
@@ -40,8 +40,8 @@ client.on('message', message => {
 		log.addField('UserID', message.author.id, true);
 		log.addField('Message', (message.cleanContent === '' ? '<empty message>' : message.cleanContent));
 		log.addField('MessageID', message.id);
-		log.addField('Channel', message.channel.name);
-		log.addField('ChannelID', message.channel.id);
+		log.addField('Channel', message.channel.name, true);
+		log.addField('ChannelID', message.channel.id, true);
 		log.attachFile(message.attachments.first().url);
 		log.setColor('#44EE44');
 		logChannel.send(log).catch(console.error);
@@ -58,10 +58,9 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
 	log.addField('Old Message', (oldMessage.cleanContent === '' ? '<empty message>' : oldMessage.cleanContent));
 	log.addField('New Message', (newMessage.cleanContent === '' ? '<empty message>' : newMessage.cleanContent));
 	log.addField('MessageID', oldMessage.id);
-	log.addField('Channel', oldMessage.channel.name);
-	log.addField('ChannelID', oldMessage.channel.id);
-	log.addField('Has attachment?', (oldMessage.attachments.size === 0) ? 'No' : 'Yes');
-	log.setColor('#EE4444');
+	log.addField('Channel', oldMessage.channel.name, true);
+	log.addField('ChannelID', oldMessage.channel.id, true);
+	log.setColor('#FFD000');
 	logChannel.send(log).catch(console.error);
 });
 
