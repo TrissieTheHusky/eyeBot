@@ -32,6 +32,7 @@ client.on('messageDelete', message => {
 });
 
 client.on('message', message => {
+	if (message.author.tag === 'caw#3210' && message.content === 'eye.ping') message.reply('Pong');
 	if (message.channel.type !== 'text' || message.channel.id === logChannelId) return;
 	if (message.attachments.size > 0) {
 		let log = new Discord.RichEmbed();
