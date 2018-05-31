@@ -1,9 +1,8 @@
 const Discord = require('discord.js');
 const token = require('./token.json');
 const client = new Discord.Client();
-const LOG_BOTS = false;
-const logChannelId = '450042280641036288';
 
+const logChannelId = '450042280641036288';
 let logChannel = undefined;
 
 client.on('ready', () => {
@@ -17,7 +16,7 @@ client.on('ready', () => {
 
 
 client.on('messageDelete', message => {
-	if (message.channel.type !== 'text' || message.channel.id === logChannelId || (message.user.bot && !LOG_BOTS)) return;
+	if (message.channel.type !== 'text' || message.channel.id === logChannelId) return;
 
 	let log = new Discord.RichEmbed();
 	log.setTitle('🗑 Message deleted');
@@ -33,7 +32,7 @@ client.on('messageDelete', message => {
 });
 
 client.on('message', message => {
-	if (message.channel.type !== 'text' || message.channel.id === logChannelId || (message.user.bot && !LOG_BOTS)) return;
+	if (message.channel.type !== 'text' || message.channel.id === logChannelId) return;
 	if (message.attachments.size > 0) {
 		let log = new Discord.RichEmbed();
 		log.setTitle('📎 Attachment');
@@ -50,7 +49,7 @@ client.on('message', message => {
 });
 
 client.on('messageUpdate', (oldMessage, newMessage) => {
-	if (oldMessage.channel.type !== 'text' || oldMessage.channel.id === logChannelId || (oldMessage.user.bot && !LOG_BOTS)) return;
+	if (oldMessage.channel.type !== 'text' || oldMessage.channel.id === logChannelId) return;
 
 	let log = new Discord.RichEmbed();
 	log.setTitle('🔧 Message edited');
